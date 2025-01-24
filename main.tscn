@@ -5,9 +5,6 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_c8qm8")
 
-[node name="WorldTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-
 [node name="MainMenu" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3

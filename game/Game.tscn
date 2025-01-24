@@ -1,8 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://d33gy75rvpmki"]
+[gd_scene load_steps=3 format=3 uid="uid://d33gy75rvpmki"]
 
 [ext_resource type="Texture2D" uid="uid://cl60cln14e0ev" path="res://icon.svg" id="1_65ays"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_s2tsy"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_s2tsy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_65ays")
+
+[node name="WorldTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

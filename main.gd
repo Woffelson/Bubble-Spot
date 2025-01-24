@@ -2,7 +2,6 @@ extends Node
 
 @export var game_pack: PackedScene = preload("res://game/Game.tscn")
 
-@onready var world_timer: Timer = %WorldTimer
 @onready var main_menu: Control = %MainMenu
 @onready var start: Button = %Start
 @onready var quit: Button = %NotStart
