@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://c277l7vlf1p0h"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_c8qm8"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_c8qm8")
+
+[node name="WorldTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="MainMenu" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Label" type="Label" parent="MainMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Teh epic geim title"
+
+[node name="Start" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start"
+
+[node name="NotStart" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Sry I just accidentally started this game, wasn't meant to play this, I'll quit. sry again"
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Woffelson GGJ 2025"
