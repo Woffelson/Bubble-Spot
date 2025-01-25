@@ -1,9 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://c277l7vlf1p0h"]
+[gd_scene load_steps=5 format=3 uid="uid://c277l7vlf1p0h"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_c8qm8"]
 
+[sub_resource type="Gradient" id="Gradient_c28si"]
+colors = PackedColorArray(0.126, 0.14, 0, 1, 0.246, 1, 0.22, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n2fab"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tgmub"]
+color_ramp = SubResource("Gradient_c28si")
+noise = SubResource("FastNoiseLite_n2fab")
+
 [node name="Main" type="Node"]
 script = ExtResource("1_c8qm8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_tgmub")
 
 [node name="MainMenu" type="Control" parent="."]
 unique_name_in_owner = true
