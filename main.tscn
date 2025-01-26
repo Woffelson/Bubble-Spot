@@ -36,7 +36,7 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 6
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer"]
@@ -45,6 +45,7 @@ layout_mode = 2
 [node name="Round" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Round time: "
 horizontal_alignment = 1
 
@@ -53,6 +54,24 @@ layout_mode = 2
 text = "<"
 
 [node name="Higher" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Citizens" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Citizens: "
+horizontal_alignment = 1
+
+[node name="LowerC" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "<"
+
+[node name="HigherC" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = ">"
 
@@ -85,7 +104,10 @@ text = "Woffelson GGJ 2025"
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_8xgoa")
+volume_db = -5.0
 autoplay = true
 
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer/Lower" to="." method="_on_lower_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer/Higher" to="." method="_on_higher_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer2/LowerC" to="." method="_on_lower_c_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer2/HigherC" to="." method="_on_higher_c_pressed"]

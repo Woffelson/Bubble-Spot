@@ -4,7 +4,6 @@ extends Node2D
 
 var menu_stuff: PackedScene = preload("res://game/choices.tscn")
 var its_on: bool = true
-#var tmp_resource: int = 0
 var world_size: Vector2i = Vector2i(16,16)
 var gatherers: Array[Gatherer]
 var society: int = 0
@@ -30,8 +29,7 @@ func _ready() -> void:
 	for x: int in world_size.x:
 		for y: int in world_size.y:
 			pass
-	var gs: int = 20
-	for g: int in gs:
+	for g: int in Global.citizens:
 		var gatherer: Gatherer = Gatherer.new()
 		if g == 0:
 			gatherer.player = true
@@ -43,12 +41,11 @@ func _ready() -> void:
 	choice_menu.add_child(choices)
 	choices.for_society_p.connect(dona.bind(true))
 	choices.random.connect(more_resu)
-	#world_timer.wait_time = 60*2
+	world_timer.wait_time = Global.time_range
 	world_timer.timeout.connect(end_game)
 	to_main_menu.pressed.connect(to_main.emit)
-	#await get_tree().create_timer(12.0).timeout
 	
-func start_already():
+func start_already() -> void:
 	if choices: choices.button1.grab_focus()
 	world_timer.start()
 	for b: Bot in bots_node.get_children():
@@ -59,7 +56,7 @@ func _process(_delta: float) -> void:
 		time_label.text = "Time: " + str(int(world_timer.time_left))
 	res_label.text = "Current resources: " + str(gatherers[0].resources[0])
 
-func create_bot(gatherer: Gatherer):
+func create_bot(gatherer: Gatherer) -> void:
 	gatherer.nimi = namegen.name_chooser(namegen.available_languages.pick_random())
 	var bot: Bot = Bot.new()
 	bot.resu = gatherer
@@ -67,7 +64,7 @@ func create_bot(gatherer: Gatherer):
 	bots_node.add_child(bot)
 	bot.for_society.connect(dona)
 
-func end_game():
+func end_game() -> void:
 	%P.hide()
 	scrolli.hide()
 	choice_menu.hide()
@@ -85,15 +82,16 @@ func end_game():
 	end_list.sort_custom(func(a: Gatherer, b: Gatherer): return a.resources[0] > b.resources[0])
 	for index: int in end_list.size():
 		var lbl: Label = Label.new()
-		lbl.text = end_list[index].nimi + ": " + str(end_list[index].resources[0])
+		lbl.set_autowrap_mode(TextServer.AUTOWRAP_WORD)
+		lbl.text = str(index+1) + ". " + end_list[index].nimi + ": " + str(end_list[index].resources[0])
 		results.add_child(lbl)
 	for index: int in end_list.size():
 		if end_list[index].nimi == "SOCIETY":
-			if index < 3:
+			if index <= round(Global.citizens/5.0):
 				bg.texture = images[0]
 				$Golden.play()
 				break
-			if index > 15:
+			if index > round(Global.citizens/2.0):
 				bg.texture = images[2]
 				$Stone.play()
 				break
@@ -102,8 +100,7 @@ func end_game():
 				$Normal.play()
 				break
 
-func more_resu(amt: int):
-	#scrolli.follow_focus
+func more_resu(amt: int) -> void:
 	var resname: String = " " + Global.resource_name
 	if amt > 1: resname += "s"
 	gatherers[0].resources[0] += amt
@@ -111,9 +108,8 @@ func more_resu(amt: int):
 	await get_tree().create_timer(.01).timeout
 	var sc = scrolli.get_v_scroll_bar()
 	sc.value = sc.max_value
-	#gatherers[0].resources[0] = tmp_resource
 	
-func dona(p: bool = false):
+func dona(p: bool = false) -> void:
 	if p && gatherers[0].resources[0] > 0:
 		gatherers[0].resources[0] -= 1
 		society += 1

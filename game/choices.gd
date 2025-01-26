@@ -23,11 +23,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	duration.value = duration.max_value - timer.time_left
 
-func time_begin(time: float, alt: Global.Alternatives):
+func time_begin(time: float, alt: Global.Alternatives) -> void:
 	timer.wait_time = time
 	duration.max_value = timer.wait_time
 	amount = randi_range(0,time)
-	print(amount)
+	#print(amount)
 	timer.start(time)
 	duration.show()
 	options.hide()

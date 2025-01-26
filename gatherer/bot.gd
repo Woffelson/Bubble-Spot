@@ -36,11 +36,12 @@ func free_time() -> void:
 	exploring = false
 	if resu:
 		resu.resources[0] += amount
-		#print([resu.nimi, resu.resources[0]])
+		resu.altruism /= amount / 4.0 + 1.0 #greed grows
 	await get_tree().create_timer(randf_range(1.0,10.0)).timeout
 	exploration_decision()
-	if randf_range(resu.altruism,1.0) > 1.0 && resu.resources[0] > 0:
-		var dona: int = clampi(randi_range(1,resu.resources[0]),1,5)
-		for d in dona:
-			resu.resources[0] -= 1
-			for_society.emit()
+	var potential_donation: int = floor(resu.resources[0] * resu.altruism)
+	#if randf_range(resu.altruism,1.0) > 1.0 && resu.resources[0] > 0:
+	var dona: int = randi_range(0,potential_donation)
+	for d in dona:
+		resu.resources[0] -= 1
+		for_society.emit()

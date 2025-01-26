@@ -11,13 +11,13 @@ func _ready() -> void:
 	await get_tree().create_timer(8.0).timeout
 	hnngh = true
 	timer.start(time)
-	timer.timeout.connect(yoo)
+	timer.timeout.connect(end_prelude)
 
 func _process(_delta: float) -> void:
 	if hnngh: $Society.modulate.a = timer.wait_time / time - timer.time_left / time
 	if Input.is_action_just_pressed("ui_accept"):
-		yoo()
+		end_prelude()
 
-func yoo():
+func end_prelude() -> void:
 	start.emit()
 	queue_free()
