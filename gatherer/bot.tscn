@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce8bls5sm8nlm"]
+
+[ext_resource type="Script" path="res://gatherer/bot.gd" id="1_u262r"]
+
+[node name="Bot" type="Node"]
+script = ExtResource("1_u262r")

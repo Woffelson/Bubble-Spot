@@ -1,11 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://d33gy75rvpmki"]
+[gd_scene load_steps=7 format=3 uid="uid://d33gy75rvpmki"]
 
 [ext_resource type="Texture2D" uid="uid://cl60cln14e0ev" path="res://icon.svg" id="1_65ays"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_s2tsy"]
 [ext_resource type="PackedScene" uid="uid://b0soh3f5rt5e7" path="res://game/prelude.tscn" id="3_862gn"]
 
+[sub_resource type="Gradient" id="Gradient_a65f2"]
+colors = PackedColorArray(0.11764, 0.12, 0.0492, 1, 0.342667, 1, 0.32, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rxpqf"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1hy1c"]
+color_ramp = SubResource("Gradient_a65f2")
+noise = SubResource("FastNoiseLite_rxpqf")
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_s2tsy")
+
+[node name="Bots" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -17,6 +30,14 @@ unique_name_in_owner = true
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_1hy1c")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -36,6 +57,14 @@ offset_bottom = 64.0
 layout_mode = 2
 offset_top = 424.0
 offset_right = 828.0
+offset_bottom = 648.0
+
+[node name="Results" type="PanelContainer" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+offset_left = 828.0
+offset_top = 75.0
+offset_right = 1148.0
 offset_bottom = 648.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
@@ -102,9 +131,25 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 horizontal_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Results" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/MarginContainer/ScrollContainer/Results"]
+layout_mode = 2
+text = "Results:"
 
 [node name="Prelude" parent="CanvasLayer" instance=ExtResource("3_862gn")]
-visible = false

@@ -1,26 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://c277l7vlf1p0h"]
+[gd_scene load_steps=4 format=3 uid="uid://c277l7vlf1p0h"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_c8qm8"]
-
-[sub_resource type="Gradient" id="Gradient_c28si"]
-colors = PackedColorArray(0.126, 0.14, 0, 1, 0.246, 1, 0.22, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n2fab"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tgmub"]
-color_ramp = SubResource("Gradient_c28si")
-noise = SubResource("FastNoiseLite_n2fab")
+[ext_resource type="Texture2D" uid="uid://blaeqlf1n3lxq" path="res://bg/title.png" id="2_0lti7"]
+[ext_resource type="AudioStream" uid="uid://cbmtcjt1iapkl" path="res://sfx/START.wav" id="2_8xgoa"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_c8qm8")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("NoiseTexture2D_tgmub")
 
 [node name="MainMenu" type="Control" parent="."]
 unique_name_in_owner = true
@@ -30,6 +15,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0lti7")
 
 [node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
 layout_mode = 1
@@ -45,9 +39,22 @@ layout_mode = 2
 theme_override_constants/separation = 14
 alignment = 1
 
-[node name="Label" type="Label" parent="MainMenu/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Teh epic geim title"
+
+[node name="Round" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Round time: "
+horizontal_alignment = 1
+
+[node name="Lower" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "<"
+
+[node name="Higher" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ">"
 
 [node name="Start" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -74,3 +81,11 @@ offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Woffelson GGJ 2025"
+
+[node name="StartSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_8xgoa")
+autoplay = true
+
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer/Lower" to="." method="_on_lower_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HBoxContainer/Higher" to="." method="_on_higher_pressed"]

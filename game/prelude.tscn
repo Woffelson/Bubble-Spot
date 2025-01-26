@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0soh3f5rt5e7"]
+[gd_scene load_steps=4 format=3 uid="uid://b0soh3f5rt5e7"]
 
 [ext_resource type="Script" path="res://game/prelude.gd" id="1_lboda"]
-[ext_resource type="Texture2D" uid="uid://dwielqhpiljxr" path="res://soc.png" id="1_rq8l6"]
+[ext_resource type="Texture2D" uid="uid://d0ic10gnv0b4h" path="res://bg/socA.png" id="2_e2gxm"]
+[ext_resource type="AudioStream" uid="uid://de817luqy3w3n" path="res://sfx/intro.wav" id="3_rc55v"]
 
 [node name="Prelude" type="ColorRect"]
 anchors_preset = 15
@@ -21,7 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_rq8l6")
+texture = ExtResource("2_e2gxm")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -32,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+self_modulate = Color(1, 1, 1, 0.784314)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer"]
@@ -40,3 +42,7 @@ text = "Cooperation is the hook
 In era of post-scarcity
 When helping others, look
 This would be our society..."
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rc55v")
+autoplay = true

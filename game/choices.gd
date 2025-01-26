@@ -12,14 +12,14 @@ var amount: int = 0
 signal random(resu)
 
 func _ready() -> void:
-	button1.pressed.connect(time_begin.bind(2.0))
-	button2.pressed.connect(time_begin.bind(4.0))
-	button3.pressed.connect(time_begin.bind(6.0))
+	button1.pressed.connect(time_begin.bind(2.0, Global.Alternatives.NEAR))
+	button2.pressed.connect(time_begin.bind(4.0, Global.Alternatives.MID))
+	button3.pressed.connect(time_begin.bind(6.0, Global.Alternatives.FAR))
 
 func _process(_delta: float) -> void:
 	duration.value = duration.max_value - timer.time_left
 
-func time_begin(time):
+func time_begin(time: float, alt: Global.Alternatives):
 	timer.wait_time = time
 	duration.max_value = timer.wait_time
 	amount = randi_range(0,time)

@@ -39,7 +39,7 @@ text = "Explore near"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Explore"
+text = "Explore midway"
 
 [node name="Button3" type="Button" parent="VBoxContainer/Options"]
 unique_name_in_owner = true
