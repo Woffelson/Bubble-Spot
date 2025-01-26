@@ -1,0 +1,75 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://browfhkvt847b"]
+
+[ext_resource type="Texture2D" uid="uid://rmglwq6audno" path="res://ui/panel.png" id="1_lu6yo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51h25"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.8, 0.733333, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_formu"]
+bg_color = Color(0.23346, 0.27, 0.1917, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.2, 0.8, 0.28, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1fgc"]
+bg_color = Color(0.18359, 0.18359, 0.18359, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.2, 0.8, 0.28, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dog2j"]
+bg_color = Color(0.442911, 0.442911, 0.44291, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.2, 0.8, 0.28, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m4uqx"]
+texture = ExtResource("1_lu6yo")
+texture_margin_left = 112.0
+texture_margin_top = 112.0
+texture_margin_right = 112.0
+texture_margin_bottom = 112.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxFlat_51h25")
+Button/styles/hover = SubResource("StyleBoxFlat_formu")
+Button/styles/normal = SubResource("StyleBoxFlat_h1fgc")
+Button/styles/pressed = SubResource("StyleBoxFlat_dog2j")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_m4uqx")

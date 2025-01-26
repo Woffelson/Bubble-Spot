@@ -1,5 +1,6 @@
 extends Node2D
 
+var resource_name: String = "mushroom"
 var menu_stuff: PackedScene = preload("res://game/choices.tscn")
 var its_on: bool = true
 var tmp_resource: int = 0
@@ -9,6 +10,8 @@ var tmp_resource: int = 0
 @onready var to_main_menu: Button = %ToMainMenu
 @onready var res_label: Label = %ResLabel
 @onready var choice_menu: CenterContainer = %ChoiceMenu
+@onready var ress: Label = %Ress
+@onready var scrolli: ScrollContainer = %Scrolli
 
 signal to_main()
 
@@ -31,4 +34,11 @@ func end_game():
 	time_label.text = "It haz ended"
 
 func more_resu(amt: int):
+	#scrolli.follow_focus
+	var resname: String = " " + resource_name
+	if amt > 1: resname += "s"
 	tmp_resource += amt
+	ress.text += "\nYou found " + str(amt) + resname
+	await get_tree().create_timer(.01).timeout
+	var sc = scrolli.get_v_scroll_bar()
+	sc.value = sc.max_value
