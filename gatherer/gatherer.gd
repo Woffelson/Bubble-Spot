@@ -7,3 +7,4 @@ class_name Gatherer extends Resource
 @export var points: float = 0.0
 
 var player: bool = false
+var altruism: float = 0.0

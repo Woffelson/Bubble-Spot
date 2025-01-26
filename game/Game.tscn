@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://d33gy75rvpmki"]
+[gd_scene load_steps=15 format=3 uid="uid://d33gy75rvpmki"]
 
 [ext_resource type="Texture2D" uid="uid://cl60cln14e0ev" path="res://icon.svg" id="1_65ays"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_s2tsy"]
+[ext_resource type="Texture2D" uid="uid://d0ic10gnv0b4h" path="res://bg/socA.png" id="2_m6w1a"]
+[ext_resource type="Texture2D" uid="uid://dx1yaksw3l7xo" path="res://bg/socB.png" id="3_0gs53"]
 [ext_resource type="PackedScene" uid="uid://b0soh3f5rt5e7" path="res://game/prelude.tscn" id="3_862gn"]
+[ext_resource type="Texture2D" uid="uid://dm55yiabqknb7" path="res://bg/socC.png" id="4_pxc35"]
+[ext_resource type="AudioStream" uid="uid://ju605dp0lmvb" path="res://sfx/golden.wav" id="7_iuvw6"]
+[ext_resource type="AudioStream" uid="uid://dnyiij331qqjv" path="res://sfx/normal.wav" id="8_k3x3g"]
+[ext_resource type="AudioStream" uid="uid://c3r3e14ib63vt" path="res://sfx/stone.wav" id="9_kil2a"]
 
 [sub_resource type="Gradient" id="Gradient_a65f2"]
 colors = PackedColorArray(0.11764, 0.12, 0.0492, 1, 0.342667, 1, 0.32, 1)
@@ -14,8 +20,16 @@ noise_type = 2
 color_ramp = SubResource("Gradient_a65f2")
 noise = SubResource("FastNoiseLite_rxpqf")
 
+[sub_resource type="InputEventKey" id="InputEventKey_41hhk"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ql3li"]
+events = [SubResource("InputEventKey_41hhk")]
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_s2tsy")
+images = Array[Texture2D]([ExtResource("2_m6w1a"), ExtResource("3_0gs53"), ExtResource("4_pxc35")])
 
 [node name="Bots" type="Node" parent="."]
 unique_name_in_owner = true
@@ -31,7 +45,8 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="BG" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -53,7 +68,8 @@ offset_top = -160.0
 offset_right = 1152.0
 offset_bottom = 64.0
 
-[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Control"]
+[node name="P" type="PanelContainer" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
 layout_mode = 2
 offset_top = 424.0
 offset_right = 828.0
@@ -98,6 +114,7 @@ size_flags_horizontal = 3
 [node name="ToMainMenu" type="Button" parent="CanvasLayer/Control/VBoxContainer/MarginContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+shortcut = SubResource("Shortcut_ql3li")
 text = "Main menu"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
@@ -153,3 +170,13 @@ layout_mode = 2
 text = "Results:"
 
 [node name="Prelude" parent="CanvasLayer" instance=ExtResource("3_862gn")]
+unique_name_in_owner = true
+
+[node name="Golden" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_iuvw6")
+
+[node name="Normal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_k3x3g")
+
+[node name="Stone" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_kil2a")

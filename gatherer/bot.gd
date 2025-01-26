@@ -9,13 +9,14 @@ var end: bool = false
 
 @onready var timer: Timer = Timer.new()
 
+signal for_society()
+
 func _ready() -> void:
 	#print(timer)
 	add_child(timer)
 	timer.timeout.connect(free_time)
 	timer.one_shot = true
-	await get_tree().create_timer(12.0).timeout
-	exploration_decision()
+	#exploration_decision()
 
 func exploration_decision() -> void:
 	if !exploring && !end:
@@ -35,6 +36,11 @@ func free_time() -> void:
 	exploring = false
 	if resu:
 		resu.resources[0] += amount
-		print([resu.nimi, resu.resources[0]])
+		#print([resu.nimi, resu.resources[0]])
 	await get_tree().create_timer(randf_range(1.0,10.0)).timeout
 	exploration_decision()
+	if randf_range(resu.altruism,1.0) > 1.0 && resu.resources[0] > 0:
+		var dona: int = clampi(randi_range(1,resu.resources[0]),1,5)
+		for d in dona:
+			resu.resources[0] -= 1
+			for_society.emit()

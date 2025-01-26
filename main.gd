@@ -1,7 +1,7 @@
 extends Node
 
 @export var game_pack: PackedScene = preload("res://game/Game.tscn")
-var time_range: int = 10:
+var time_range: int = 20:
 	set(value):
 		time_range = clampi(value,10,3600)
 	get():
@@ -36,6 +36,7 @@ func end_game() -> void:
 	remove_child(game)
 	game.queue_free()
 	main_menu.show()
+	start.grab_focus()
 
 func _on_lower_pressed() -> void:
 	time_range -= 1
